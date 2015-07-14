@@ -235,5 +235,75 @@ IDE_Morph.prototype.init = function (isAutoFill) {
 
     this.currentCategory = 'makers';
 }
+// Override Snap! menus
+IDE_Morph.prototype.snapMenu = function () {
+    var menu,
+    world = this.world();
 
+    menu = new MenuMorph(this);
+    menu.addItem('About FirstMakers...', 'aboutFirstmakers')
+    menu.addItem('About Snap4Arduino...', 'aboutSnap4Arduino');
+    menu.addLine();
 
+    menu.addItem(
+        'First makers website',
+        function () {
+            window.open('http://www.firstmakers.com', 'fmWebsite');
+        }
+    );
+                
+    if (world.isDevMode) {
+        menu.addLine();
+        menu.addItem(
+            'Switch back to user mode',
+            'switchToUserMode',
+            'disable deep-Morphic\ncontext menus'
+            + '\nand show user-friendly ones',
+            new Color(0, 100, 0)
+        );
+    } else if (world.currentKey === 16) { // shift-click
+        menu.addLine();
+        menu.addItem(
+                'Switch to dev mode',
+                'switchToDevMode',
+                'enable Morphic\ncontext menus\nand inspectors,'
+                 + '\nnot user-friendly!',
+                new Color(100, 0, 0)
+        );
+    }
+    menu.popup(world, this.logo.bottomLeft());
+};
+
+IDE_Morph.prototype.fmWebsite = function(){
+
+};
+
+IDE_Morph.prototype.aboutFirstmakers = function(){
+    var dlg, aboutTxt, creditsTxt, translations,
+    module, aboutBtn, creditsBtn,
+    world = this.world();
+
+    aboutTxt = 'FirstMakers 0.10 \n\n'
+    + 'Copyright \u24B8 2015 TIDE S.A.\n'
+    //+ 'edutec@citilab.eu\n\n'
+
+    + 'FirstMakers is a modification of Snap4Arduino developed by the\n'
+    + 'Edutec research group at the Citilab, Cornellà de Llobregat\n'
+    + '(Barcelona).\n\n'
+
+    /*+ 'The Edutec research group is comprised of:\n'
+    + 'Víctor Casado\n'
+    + 'Jordi Delgado\n'
+    + 'Jose García\n'
+    + 'Joan Güell\n'
+    + 'Bernat Romagosa\n\n'*/
+
+    + 'For more information, please visit\n'
+    + 'http://www.firstmakers.com\n'
+    //+ 'http://edutec.citilab.eu';
+
+    dlg = new DialogBoxMorph();
+    dlg.inform('About Firstmakers', aboutTxt, world);
+    dlg.fixLayout();
+    dlg.drawNew();
+};
