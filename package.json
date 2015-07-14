@@ -1,0 +1,20 @@
+{
+  "main": "makers.html",
+  "name": "Snap4FirstMakers",
+  "description": "Snap4FirstMakers",
+  "window": {
+    "title": "Snap4FirstMakers",
+    "icon": "FirstMakers.ico",
+    "toolbar": false,
+    "frame": true,
+    "position": "center",
+    "width": 960,
+    "height": 640,
+    "min_width": 960,
+    "min_height": 640
+  },
+  "dependencies": {
+    "firmata": "~0.3.3",
+    "serialport": ">=0.7.5"
+  }
+}
